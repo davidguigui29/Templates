@@ -1,0 +1,116 @@
+{
+    "providerId": "spremail.com",
+    "providerName": "spremail",
+    "serviceId": "spremail_hosting",
+    "serviceName": "Spremail",
+    "sharedServiceName": true,
+    "logoUrl": "https://mailadmin.spremail.com/cpanel/mailimage?filename=spremail-logo.png",
+    "description": "This is a template to enable mail hosting with Spremail",
+    "variableDescription": "Cloudflare Domain Connect verification uses %host% and %verifytxt%. Mail hosting DNS values use %cname_host%, %cname_points%, %mx_points%, %mx2_points%, %mx3_points%, %spf_data%, %dkim_host%, %dkim_data%, %dkim_host1%, %dkim_data1%, %dkim_host2%, %dkim_data2%, %dmarc_data%, %website_host%, %website_points%, %txt_host%, %txt_points%, and %target%.",
+    "syncBlock": false,
+    "hostRequired": false,
+    "version": 1,
+    "syncPubKeyDomain": "spremail.com",
+    "records": [
+        {
+            "groupId": "verification",
+            "type": "TXT",
+            "host": "%host%",
+            "data": "%verifytxt%",
+            "ttl": 600
+        },
+        {
+            "groupId": "gw-verification",
+            "type": "CNAME",
+            "host": "%cname_host%",
+            "pointsTo": "%cname_points%",
+            "ttl": 600
+        },
+        {
+            "groupId": "website-redirection",
+            "type": "CNAME",
+            "host": "%website_host%",
+            "pointsTo": "%website_points%",
+            "ttl": 600
+        },
+        {
+            "groupId": "gw-mx1",
+            "type": "MX",
+            "host": "@",
+            "pointsTo": "%mx_points%",
+            "priority": 10,
+            "ttl": 600
+        },
+        {
+            "groupId": "gw-mx2",
+            "type": "MX",
+            "host": "@",
+            "pointsTo": "%mx2_points%",
+            "priority": 20,
+            "ttl": 600
+        },
+        {
+            "groupId": "gw-mx3",
+            "type": "MX",
+            "host": "@",
+            "pointsTo": "%mx3_points%",
+            "priority": 50,
+            "ttl": 600
+        },
+        {
+            "groupId": "gw-spf",
+            "type": "SPFM",
+            "host": "@",
+            "spfRules": "%spf_data%"
+        },
+        {
+            "groupId": "gw-dkim",
+            "type": "TXT",
+            "host": "%dkim_host%._domainkey",
+            "data": "%dkim_data%",
+            "ttl": 600
+        },
+        {
+            "groupId": "gw-dkim1",
+            "type": "TXT",
+            "host": "%dkim_host1%._domainkey",
+            "data": "%dkim_data1%",
+            "ttl": 600
+        },
+        {
+            "groupId": "gw-dkim2",
+            "type": "TXT",
+            "host": "%dkim_host2%._domainkey",
+            "data": "%dkim_data2%",
+            "ttl": 600
+        },
+        {
+            "groupId": "gw-dmarc",
+            "type": "TXT",
+            "host": "_dmarc",
+            "data": "%dmarc_data%",
+            "txtConflictMatchingMode": "All",
+            "essential": "OnApply",
+            "ttl": 600
+        },
+        {
+            "groupId": "gw-redir301",
+            "type": "REDIR301",
+            "target": "%target%",
+            "host": "@"
+        },
+        {
+            "groupId": "gw-redir302",
+            "type": "REDIR302",
+            "target": "%target%",
+            "host": "@"
+        },
+        {
+            "groupId": "general-text",
+            "type": "TXT",
+            "host": "%txt_host%",
+            "data": "%txt_points%",
+            "ttl": 600
+        }
+    ]
+}
